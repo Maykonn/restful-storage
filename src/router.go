@@ -2,16 +2,17 @@ package src
 
 import (
 	"github.com/gorilla/mux"
-	"net/http"
-	"fmt"
+	"maykonn/api/src/handlers"
 )
 
 func Router() *mux.Router {
-	router := mux.NewRouter()
-	router.HandleFunc("/test", TestHandler).Methods("GET")
-	return router
-}
+	const route = "/[\\w\\d-_]{64}"
 
-func TestHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("test")
+	router := mux.NewRouter()
+	router.HandleFunc(route, handlers.Get).Methods("GET")
+	router.HandleFunc(route, handlers.Post).Methods("POST")
+	router.HandleFunc(route, handlers.Put).Methods("PUT")
+	router.HandleFunc(route, handlers.Delete).Methods("DELETE")
+
+	return router
 }
