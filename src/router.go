@@ -11,7 +11,7 @@ func Router() *mux.Router {
 	router := mux.NewRouter()
 	router.HandleFunc("/authorization", authorization_token.New).Methods("GET")
 
-	const defaultRoute = "/{route:[\\w\\d-_]{1,}}"
+	const defaultRoute = "/{route:[\\w\\d-]{1,}}"
 	router.HandleFunc(defaultRoute, default_http_verb.Get).Methods("GET")
 	router.HandleFunc(defaultRoute, default_http_verb.Post).Methods("POST")
 	router.HandleFunc(defaultRoute, default_http_verb.Put).Methods("PUT")
