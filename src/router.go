@@ -2,17 +2,23 @@ package src
 
 import (
 	"github.com/gorilla/mux"
-	"maykonn/api/src/handlers"
+	"maykonn/api/src/handlers/default_http_verb"
+	"maykonn/api/src/handlers/authorization_token"
+	"net/http"
 )
 
 func Router() *mux.Router {
-	const route = "/[\\w\\d-_]{64}"
-
 	router := mux.NewRouter()
-	router.HandleFunc(route, handlers.Get).Methods("GET")
-	router.HandleFunc(route, handlers.Post).Methods("POST")
-	router.HandleFunc(route, handlers.Put).Methods("PUT")
-	router.HandleFunc(route, handlers.Delete).Methods("DELETE")
+	router.HandleFunc("/authorization", authorization_token.New).Methods("GET")
+
+	const defaultRoute = "/{route:[\\w\\d-_]{1,}}"
+	router.HandleFunc(defaultRoute, default_http_verb.Get).Methods("GET")
+	router.HandleFunc(defaultRoute, default_http_verb.Post).Methods("POST")
+	router.HandleFunc(defaultRoute, default_http_verb.Put).Methods("PUT")
+	router.HandleFunc(defaultRoute, default_http_verb.Patch).Methods("PATCH")
+	router.HandleFunc(defaultRoute, default_http_verb.Delete).Methods("DELETE")
+
+	http.Handle("/", router)
 
 	return router
 }
