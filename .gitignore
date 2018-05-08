@@ -1,3 +1,4 @@
 .idea/
 ex_*
 build/
+.env
