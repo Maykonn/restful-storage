@@ -1,20 +1,23 @@
-.PHONY: build run reflex dependencies install stop show-pid
+server: reflex
 
-build:
+clear:
+	-rm ./build/api
+
+build: clear
 	go build -o ./build/api ./main.go
 
 run: build
 	./build/api
 
-reflex:
+reflex: stop
 	reflex --start-service -r '\.go$$' make run
 
 stop:
 	echo "Stopping ./build/api if it's running"
-	kill -9 `cat ./tmp/.pid`
-	rm ./tmp/.pid
+	-kill -9 `cat ./tmp/.pid`
+	-rm ./tmp/.pid
 
-show-pid:
+showpid:
 	lsof -t -i:3000
 
 dependencies:
@@ -24,5 +27,6 @@ dependencies:
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-install: dependencies run
-install-reflex: dependencies reflex
+install: stop dependencies reflex
+
+.PHONY: build run reflex stop showpid dependencies install
