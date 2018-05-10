@@ -1,11 +1,18 @@
 package src
 
 import (
-	"net/http"
+	"os"
 	"log"
+	"net/http"
 )
 
 func StartServer() {
-	err := http.ListenAndServe(":8000", Router())
-	log.Fatal(err)
+	if address := os.Getenv("SERVER_ADDRESS"); address != "" {
+		if port := os.Getenv("SERVER_PORT"); port != "" {
+			address += ":" + port
+			log.Println("Server listening at ->", address)
+			panic(http.ListenAndServe(address, Router()))
+		}
+	}
+	panic("Server configuration is invalid")
 }
