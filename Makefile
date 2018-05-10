@@ -1,19 +1,27 @@
-install:
-	go get -u github.com/codegangsta/gin
+.PHONY: build run reflex dependencies install stop show-pid
+
+build:
+	go build -o ./build/api ./main.go
+
+run: build
+	./build/api
+
+reflex:
+	reflex --start-service -r '\.go$$' make run
+
+dependencies:
 	go get -u github.com/joho/godotenv
 	go get -u github.com/google/uuid
 	go get -u github.com/dgrijalva/jwt-go
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-clean:
-	rm -rf ./build/*
+install: dependencies reflex
 
-dev-server: clean
-	gin -b ./build/api -p 8001 -a 8000 -l localhost
+stop:
+	echo "Stopping ./build/api if it's running"
+	kill -9 `cat ./tmp/.pid`
+	rm ./tmp/.pid
 
-compile: clean
-	GOOS=linux go build -o ./build/api ./main.go
-
-start: install dev-server
-deploy: install compile
+show-pid:
+	lsof -t -i:3000
