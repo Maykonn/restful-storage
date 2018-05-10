@@ -1,5 +1,9 @@
 server: reflex
 
+install: stop dependencies
+	mkdir ./tmp
+	make server
+
 clear:
 	-rm ./build/api
 
@@ -26,7 +30,5 @@ dependencies:
 	go get -u github.com/dgrijalva/jwt-go
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
-
-install: stop dependencies reflex
 
 .PHONY: build run reflex stop showpid dependencies install
