@@ -1,4 +1,4 @@
-package default_http_verb
+package default_verb
 
 import (
 	"net/http"
