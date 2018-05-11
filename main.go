@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/joho/godotenv"
-	"maykonn/api/src"
+	"maykonn/restful-storage/src"
 	"io/ioutil"
 	"strconv"
 	"os"
