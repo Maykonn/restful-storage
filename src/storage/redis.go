@@ -1,4 +1,4 @@
-package src
+package storage
 
 import (
 	"github.com/go-redis/redis"
@@ -10,7 +10,7 @@ var RedisCli *redis.Client
 var once sync.Once
 
 // Singleton for Redis.Client
-func GetInstance() *redis.Client {
+func Redis() *redis.Client {
 	// thread-safe
 	once.Do(func() {
 		if address := os.Getenv("REDIS_ADDRESS"); address != "" {
