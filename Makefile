@@ -32,4 +32,4 @@ dependencies:
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-.PHONY: install build run reflex stop showpid create-tmp dependencies
+.PHONY: server install reflex run build stop create-tmp clear showpid dependencies
