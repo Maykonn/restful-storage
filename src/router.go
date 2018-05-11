@@ -2,9 +2,9 @@ package src
 
 import (
 	"github.com/gorilla/mux"
-	"maykonn/restful-storage/src/handlers/authorization_token"
-	"maykonn/restful-storage/src/handlers/default_http_verb"
-	"maykonn/restful-storage/src/handlers/middleware"
+	"maykonn/restful-storage/src/http_handlers/authorization_token"
+	"maykonn/restful-storage/src/http_handlers/default_verb"
+	"maykonn/restful-storage/src/http_handlers/middleware"
 )
 
 const defaultVerbsRoutes = "/{route:[\\w\\d-]{1,}}"
@@ -29,11 +29,11 @@ func AuthorizationRouter() *mux.Router {
 func DefaultVerbsRouter() *mux.Router {
 	router := mux.NewRouter()
 
-	router.HandleFunc(defaultVerbsRoutes, default_http_verb.Get).Methods("GET")
-	router.HandleFunc(defaultVerbsRoutes, default_http_verb.Post).Methods("POST")
-	router.HandleFunc(defaultVerbsRoutes, default_http_verb.Put).Methods("PUT")
-	router.HandleFunc(defaultVerbsRoutes, default_http_verb.Patch).Methods("PATCH")
-	router.HandleFunc(defaultVerbsRoutes, default_http_verb.Delete).Methods("DELETE")
+	router.HandleFunc(defaultVerbsRoutes, default_verb.Get).Methods("GET")
+	router.HandleFunc(defaultVerbsRoutes, default_verb.Post).Methods("POST")
+	router.HandleFunc(defaultVerbsRoutes, default_verb.Put).Methods("PUT")
+	router.HandleFunc(defaultVerbsRoutes, default_verb.Patch).Methods("PATCH")
+	router.HandleFunc(defaultVerbsRoutes, default_verb.Delete).Methods("DELETE")
 
 	Authorization := middleware.Authorization{}
 	router.Use(Authorization.Middleware)
