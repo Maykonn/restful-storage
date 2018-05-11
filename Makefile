@@ -1,25 +1,26 @@
 server: reflex
 
-install: stop dependencies
-	mkdir ./tmp
-	make server
-
-clear:
-	-rm ./build/api
-
-build: clear
-	go build -o ./build/api ./main.go
-
-run: build
-	./build/api
+install: stop dependencies create-tmp server
 
 reflex: stop
 	reflex --start-service -r '\.go$$' make run
 
-stop:
+run: stop build create-tmp
+	./build/api
+
+build: clear
+	go build -o ./build/api ./main.go
+
+stop: clear
 	echo "Stopping ./build/api if it's running"
 	-kill -9 `cat ./tmp/.pid`
 	-rm ./tmp/.pid
+
+create-tmp:
+	-mkdir ./tmp
+
+clear:
+	-rm ./build/api
 
 showpid:
 	lsof -t -i:3000
@@ -31,4 +32,4 @@ dependencies:
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-.PHONY: build run reflex stop showpid dependencies install
+.PHONY: install build run reflex stop showpid create-tmp dependencies
