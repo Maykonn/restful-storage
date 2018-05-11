@@ -15,7 +15,7 @@ func Redis() *redis.Client {
 	once.Do(func() {
 		if address := os.Getenv("REDIS_ADDRESS"); address != "" {
 			RedisCli = redis.NewClient(&redis.Options{
-				Addr:     "localhost:6379",
+				Addr:     address,
 				Password: "",
 				DB:       0,
 			})
