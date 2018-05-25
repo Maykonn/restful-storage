@@ -1,6 +1,9 @@
-server: reflex
-
 install: stop dependencies create-tmp server
+
+server: fmt reflex
+
+fmt:
+	gofmt -w .
 
 reflex: stop
 	reflex --start-service -r '\.go$$' make run
@@ -8,7 +11,7 @@ reflex: stop
 run: stop build create-tmp
 	./build/api
 
-build: clear
+build: clear fmt
 	go build -o ./build/api ./main.go
 
 stop: clear
@@ -33,4 +36,4 @@ dependencies:
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-.PHONY: server install reflex run build stop create-tmp clear showpid dependencies
+.PHONY: install server fmt reflex run build stop create-tmp clear showpid dependencies
