@@ -11,19 +11,11 @@ import (
 )
 
 func main() {
-	if err := godotenv.Load(); err == nil {
-		writePidFile("./tmp/.pid")
-		src.StartServer()
-	} else {
-		panic("Error loading .env file")
+	if _, err := (godotenv.Load()).(error); err {
+		panic("Error loading .env_ file")
 	}
-
-	/*if err := godotenv.Load(); err == nil {
-		writePidFile("./tmp/.pid")
-		src.StartServer()
-	} else {
-		panic("Error loading .env file")
-	}*/
+	writePidFile("./tmp/.pid")
+	src.StartServer()
 }
 
 // Write a pid file, but first make sure it doesn't exist with a running pid.

@@ -2,6 +2,8 @@ install: stop dependencies create-tmp server
 
 server: fmt reflex
 
+dev-server: reflex
+
 fmt:
 	gofmt -w .
 
@@ -36,4 +38,4 @@ dependencies:
 	go get -u github.com/Maykonn/jwt-go-validation
 	go get -u github.com/gorilla/mux
 
-.PHONY: install server fmt reflex run build stop create-tmp clear showpid dependencies
+.PHONY: install server dev-server fmt reflex run build stop create-tmp clear showpid dependencies
