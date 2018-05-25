@@ -1,9 +1,9 @@
 package default_verb
 
 import (
-	"net/http"
 	"fmt"
 	"maykonn/restful-storage/src/storage"
+	"net/http"
 )
 
 func Post(w http.ResponseWriter, r *http.Request) {

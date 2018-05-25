@@ -1,9 +1,9 @@
 package src
 
 import (
-	"os"
 	"log"
 	"net/http"
+	"os"
 )
 
 func StartServer() {

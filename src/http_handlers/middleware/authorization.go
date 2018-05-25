@@ -1,10 +1,10 @@
 package middleware
 
 import (
-	"net/http"
-	"github.com/Maykonn/jwt-go-validation"
-	"os"
 	"fmt"
+	"github.com/Maykonn/jwt-go-validation"
+	"net/http"
+	"os"
 )
 
 type Authorization struct{}

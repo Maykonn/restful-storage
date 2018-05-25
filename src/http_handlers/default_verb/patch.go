@@ -1,8 +1,8 @@
 package default_verb
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 )
 
 func Patch(w http.ResponseWriter, r *http.Request) {

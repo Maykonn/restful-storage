@@ -19,8 +19,9 @@ func Redis() *redis.Client {
 				Password: "",
 				DB:       0,
 			})
+		} else {
+			panic("Invalid Redis Server configuration")
 		}
-		panic("Invalid Redis Server configuration")
 	})
 	return RedisCli
 }

@@ -1,21 +1,29 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"maykonn/restful-storage/src"
-	"io/ioutil"
-	"strconv"
-	"os"
-	"syscall"
 	"fmt"
+	"github.com/joho/godotenv"
+	"io/ioutil"
+	"maykonn/restful-storage/src"
+	"os"
+	"strconv"
+	"syscall"
 )
 
 func main() {
 	if err := godotenv.Load(); err == nil {
 		writePidFile("./tmp/.pid")
 		src.StartServer()
+	} else {
+		panic("Error loading .env file")
 	}
-	panic("Error loading .env file")
+
+	/*if err := godotenv.Load(); err == nil {
+		writePidFile("./tmp/.pid")
+		src.StartServer()
+	} else {
+		panic("Error loading .env file")
+	}*/
 }
 
 // Write a pid file, but first make sure it doesn't exist with a running pid.
